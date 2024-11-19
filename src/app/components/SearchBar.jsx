@@ -93,7 +93,7 @@ const SearchBar = () => {
                     }}
                   />
                   <span
-                    className="absolute top-2 right-2 bg-[#404040] max-w-[31px] w-full rounded-[30px] flex items-center justify-center  text-white text-xl cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
+                    className=" mt-[-100px] ml-[40px] absolute bg-[#404040] max-w-[31px] w-full rounded-[30px] flex items-center justify-center  text-white text-xl cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
                     onClick={() => handleRemoveImage(index)}
                   >
                     &times;
