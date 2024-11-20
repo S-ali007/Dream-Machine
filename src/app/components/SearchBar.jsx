@@ -37,7 +37,10 @@ const SearchBar = () => {
 
     Promise.all(newImages)
       .then((imageDataURLs) => {
-        setImages(imageDataURLs);
+        setImages((prevImages) => {
+          const updatedImages = [...prevImages, ...imageDataURLs];
+          return updatedImages.slice(0, 2);
+        });
       })
       .catch((error) => {
         console.error("Error reading files:", error);
@@ -63,49 +66,89 @@ const SearchBar = () => {
     // console.log("Images:", images);
   };
   const handleRemoveImage = (index) => {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages[index] = null; // Set the removed image to null
+      return updatedImages;
+    });
   };
 
+  const handleSwapImages = () => {
+    if (images.length === 2) {
+      setImages((prevImages) => [prevImages[1], prevImages[0]]);
+    }
+  };
   return (
     <div className="">
       <div className="max-w-[896px] w-full flex mx-auto flex-col">
         {/* Input and image upload */}
         <div className="w-full mx-auto bg-[#ffffff26] items-center rounded-[28px]">
           {images.length > 0 && (
-            <div
-              className={`${
-                images ? "scale-[100px]" : "scale-0"
-              } max-w-[180px] w-full mt-[-50px] flex gap-5 ml-[22px]`}
-            >
-              {images.map((image, index) => (
+            <div className="max-w-[200px] w-full mt-[-50px] flex gap-7 ml-[22px]">
+              {images.slice(0, 2).map((image, index) => (
                 <div
                   key={index}
                   className="relative group max-w-[190px] w-full"
                 >
-                  <img
-                    src={image}
-                    alt={`Uploaded ${index + 1}`}
-                    className={`rounded-lg max-w-[82px] w-full max-h-[103px] h-full ${
-                      index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
-                    } animate-scaleImg`}
-                    style={{
-                      animationDelay: `${index * 0.4}s`,
-                    }}
-                  />
-                  <span
-                    className=" mt-[-100px] ml-[40px] absolute bg-[#404040] max-w-[31px] w-full rounded-[30px] flex items-center justify-center  text-white text-xl cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
-                    onClick={() => handleRemoveImage(index)}
-                  >
-                    &times;
-                  </span>
+                  {image ? (
+                    <>
+                      <img
+                        src={image}
+                        alt={`Uploaded ${index + 1}`}
+                        className={`rounded-lg max-w-[82px] w-full max-h-[103px] h-full ${
+                          index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
+                        } animate-scaleImg`}
+                        style={{
+                          animationDelay: `${index * 0.4}s`,
+                        }}
+                      />
+                      <span
+                        className="mt-[-100px] ml-[40px] absolute bg-[#404040] max-w-[31px] w-full rounded-[30px] flex items-center justify-center text-white text-xl cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
+                        onClick={() => handleRemoveImage(index)}
+                      >
+                        &times;
+                      </span>
+                    </>
+                  ) : (
+                    <div
+                      className={`${
+                        index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
+                      } rounded-lg max-w-[100px]  w-full h-[103px]  bg-gray-300 flex items-center justify-center cursor-pointer`}
+                      onClick={() => triggerFileInputClick(index)}
+                    >
+                      +
+                    </div>
+                  )}
                 </div>
               ))}
+
+              {images.length === 2 && (
+                <button
+                  onClick={handleSwapImages}
+                  className="ml-[77px] absolute text-white px-3 py-1 rounded-lg cursor-pointer"
+                >
+                  <svg
+                    width="16"
+                    height="6"
+                    viewBox="0 0 16 6"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M3.59183 3.14494C4.86355 1.86844 6.41965 1.25001 7.95077 1.25C9.46622 1.24999 11.0061 1.85582 12.2706 3.10594L12.1798 3.19674L11.4154 3.96116C11.1792 4.19732 11.1108 4.42313 11.2103 4.63857C11.3138 4.84988 11.5231 4.98039 11.838 5.03011L14.6719 5.45271C14.9039 5.49415 15.0779 5.45686 15.194 5.34085C15.3058 5.22069 15.3452 5.04461 15.312 4.81259L14.8956 1.97242C14.8501 1.6534 14.7196 1.44416 14.5041 1.34473C14.2887 1.24529 14.0629 1.31365 13.8267 1.54982L13.1542 2.2223C11.671 0.753646 9.82316 -8.12944e-06 7.95076 0C6.06187 8.20121e-06 4.19798 0.767016 2.70819 2.2613L1.9967 1.54982C1.76054 1.31365 1.53474 1.24529 1.31929 1.34473C1.10384 1.44416 0.973332 1.6534 0.927756 1.97242L0.511364 4.81259C0.478219 5.04461 0.517579 5.22069 0.629446 5.34085C0.745455 5.45686 0.91947 5.49415 1.15149 5.45271L3.98544 5.03011C4.30032 4.98039 4.50956 4.84988 4.61314 4.63857C4.71257 4.42313 4.64421 4.19732 4.40805 3.96116L3.64363 3.19674L3.59183 3.14494Z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </button>
+              )}
             </div>
           )}
 
           <div className="w-full flex items-center px-[8px]">
             <div
-              className="max-w-[58px] w-full flex justify-center"
+              className="max-w-[45px] w-full flex justify-center cursor-pointer"
               onClick={triggerFileInputClick}
             >
               <input
@@ -139,8 +182,8 @@ const SearchBar = () => {
                 rows={1}
                 value={text}
                 onChange={handleTextChange}
-                onFocus={() => setShowIdeas(false)}
-                onBlur={() => setShowIdeas(true)}
+                // onFocus={() => setShowIdeas(false)}
+                // onBlur={() => setShowIdeas(true)}
                 placeholder="Type some text or add an image..."
                 className="w-full  h-fit focus:outline-none text-[white] text-[17px] font-[500] bg-transparent resize-none overflow-hidden "
               />
@@ -173,7 +216,7 @@ const SearchBar = () => {
 
         {/* dummy-commands and loop */}
         <div className="flex space-x-4 mt-4 items-end ">
-          {!showIdeas && (
+          {text && (
             <div className="justify-end flex w-full gap-[25px]">
               <label className="flex items-center space-x-2">
                 <input
@@ -196,7 +239,7 @@ const SearchBar = () => {
             </div>
           )}
 
-          {showIdeas && (
+          {!text && (
             <div className="max-w-[864px] w-full flex items-center justify-between mt-2 gap-[20px] px-[15px]">
               <svg
                 onClick={handleArrowClick}
@@ -208,8 +251,8 @@ const SearchBar = () => {
                 <path
                   d="M1.84998 7.49998C1.84998 4.66458 4.05979 1.84998 7.49998 1.84998C10.2783 1.84998 11.6515 3.9064 12.2367 5H10.5C10.2239 5 10 5.22386 10 5.5C10 5.77614 10.2239 6 10.5 6H13.5C13.7761 6 14 5.77614 14 5.5V2.5C14 2.22386 13.7761 2 13.5 2C13.2239 2 13 2.22386 13 2.5V4.31318C12.2955 3.07126 10.6659 0.849976 7.49998 0.849976C3.43716 0.849976 0.849976 4.18537 0.849976 7.49998C0.849976 10.8146 3.43716 14.15 7.49998 14.15C9.44382 14.15 11.0622 13.3808 12.2145 12.2084C12.8315 11.5806 13.3133 10.839 13.6418 10.0407C13.7469 9.78536 13.6251 9.49315 13.3698 9.38806C13.1144 9.28296 12.8222 9.40478 12.7171 9.66014C12.4363 10.3425 12.0251 10.9745 11.5013 11.5074C10.5295 12.4963 9.16504 13.15 7.49998 13.15C4.05979 13.15 1.84998 10.3354 1.84998 7.49998Z"
                   fill="#fff"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
               <span className="text-white truncate  w-full">
