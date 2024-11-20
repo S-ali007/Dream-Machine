@@ -6,7 +6,6 @@ const SearchBar = () => {
   const [enhancePrompt, setEnhancePrompt] = useState(true);
   const [images, setImages] = useState([]);
   const [text, setText] = useState("");
-  const [showIdeas, setShowIdeas] = useState(false);
   const [ideaIndex, setIdeaIndex] = useState(0);
 
   const dummyIdeas = [
@@ -79,7 +78,7 @@ const SearchBar = () => {
     }
   };
   return (
-    <div className="">
+    <div>
       <div className="max-w-[896px] w-full flex mx-auto flex-col">
         {/* Input and image upload */}
         <div className="w-full mx-auto bg-[#ffffff26]  items-center rounded-[28px]">
