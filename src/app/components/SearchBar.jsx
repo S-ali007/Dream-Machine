@@ -113,7 +113,7 @@ const SearchBar = () => {
                     <div
                       className={`${
                         index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
-                      } rounded-lg max-w-[100px]   w-full h-[103px] p-[7px] text-[#fff]  backdrop-blur   bg-[#ffffff26] flex flex-col  cursor-pointer`}
+                      } rounded-lg max-w-[82px]   w-full h-[103px] p-[7px] text-[#fff]  backdrop-blur   bg-[#ffffff26] flex flex-col  cursor-pointer`}
                       onClick={() => triggerFileInputClick(index)}
                     >
                       <span className="text-[30px]">+</span>
