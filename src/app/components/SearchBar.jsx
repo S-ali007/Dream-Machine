@@ -68,11 +68,9 @@ const SearchBar = () => {
   const handleRemoveImage = (index) => {
     setImages((prevImages) => {
       const updatedImages = [...prevImages];
-      updatedImages[index] = null; 
+      updatedImages[index] = null;
       return updatedImages;
     });
-
-    
   };
 
   const handleSwapImages = () => {
@@ -115,10 +113,11 @@ const SearchBar = () => {
                     <div
                       className={`${
                         index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
-                      } rounded-lg max-w-[100px]  w-full h-[103px]  bg-gray-300 flex items-center justify-center cursor-pointer`}
+                      } rounded-lg max-w-[100px]   w-full h-[103px] text-[#fff]  bg-[#ffffff26] flex fle-col  cursor-pointer`}
                       onClick={() => triggerFileInputClick(index)}
                     >
-                      +
+                      <span className="text-[40px]">+</span>
+                      <span>{index === 0 ? "Start Frame " : "End Frame"}</span>
                     </div>
                   )}
                 </div>
