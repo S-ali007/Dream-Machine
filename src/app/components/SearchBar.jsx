@@ -90,13 +90,6 @@ const SearchBar = () => {
     // console.log("Text:", text);
     console.log("Images:", images);
   };
-  // const handleRemoveImage = (index) => {
-  //   setImages((prevImages) => {
-  //     const updatedImages = [...prevImages];
-  //     updatedImages[index] = null;
-  //     return updatedImages;
-  //   });
-  // };
 
   const handleSwapImages = () => {
     if (images.length === 2) {
@@ -105,7 +98,11 @@ const SearchBar = () => {
   };
   return (
     <div>
-      <div className="max-w-[896px] w-full flex mx-auto flex-col">
+      <div className="relative max-w-[896px] w-full h-full">
+        <div className="spinning-gradient"></div>
+      </div>
+
+      <div className="max-w-[896px] w-full flex mx-auto flex-col relative z-50">
         {/* Input and image upload */}
         <div className="w-full mx-auto bg-[#ffffff26]  items-center rounded-[28px]">
           {images.length > 0 && (
@@ -113,7 +110,7 @@ const SearchBar = () => {
               {images.slice(0, 2).map((image, index) => (
                 <div
                   key={index}
-                  className="relative group max-w-[190px] w-full"
+                  className="relative group max-w-[190px] w-full "
                 >
                   {image ? (
                     <>
