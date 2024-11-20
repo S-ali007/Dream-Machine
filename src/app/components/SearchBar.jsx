@@ -100,7 +100,7 @@ const SearchBar = () => {
   return (
     <div>
       <div className="relative max-w-[896px] w-full h-full pt-[120px]">
-        <div className="spinning-gradient"></div>
+        <div className="spinning-gradient rounded-[999px]"></div>
       </div>
   
       <div className="max-w-[896px] w-full flex mx-auto flex-col relative z-50">

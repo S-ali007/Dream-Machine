@@ -23,11 +23,12 @@ body {
   font-family: var(--font-graphik-regular);
 }
 .spinning-gradient {
+  border-radius: 9999px;
   position: fixed;
   top: 20%;
-  left: 30%;
-  width: 40vw;
-  height: 40vw;
+  left: 23%;
+  width: 55vw;
+  height: 30vw;
   transform: translate(-50%, -50%);
   filter: blur(100px);
   pointer-events: none;
@@ -43,6 +44,7 @@ body {
     #ab2666,
     #09f
   );
+  overflow: hidden;
 }
 
 @keyframes ColorBlobs_spin__CbrXa {
