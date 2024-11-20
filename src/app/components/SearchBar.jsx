@@ -68,9 +68,11 @@ const SearchBar = () => {
   const handleRemoveImage = (index) => {
     setImages((prevImages) => {
       const updatedImages = [...prevImages];
-      updatedImages[index] = null; // Set the removed image to null
+      updatedImages[index] = null; 
       return updatedImages;
     });
+
+    
   };
 
   const handleSwapImages = () => {
