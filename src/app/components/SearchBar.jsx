@@ -113,11 +113,13 @@ const SearchBar = () => {
                     <div
                       className={`${
                         index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
-                      } rounded-lg max-w-[100px]   w-full h-[103px] text-[#fff]  bg-[#ffffff26] flex fle-col  cursor-pointer`}
+                      } rounded-lg max-w-[100px]   w-full h-[103px] p-[7px] text-[#fff]   bg-[#ffffff26] flex flex-col  cursor-pointer`}
                       onClick={() => triggerFileInputClick(index)}
                     >
-                      <span className="text-[40px]">+</span>
-                      <span>{index === 0 ? "Start Frame " : "End Frame"}</span>
+                      <span className="text-[30px]">+</span>
+                      <span className="text-[13px] max-w-[64px] uppercase w-full">
+                        {index === 0 ? "Start Frame " : "End Frame"}
+                      </span>
                     </div>
                   )}
                 </div>
