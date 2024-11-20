@@ -24,15 +24,15 @@ body {
 }
 .spinning-gradient {
   position: fixed;
-  top: 25%;
-  left: 35%;
-  width: 30vw;
-  height: 30vw;
+  top: 20%;
+  left: 30%;
+  width: 40vw;
+  height: 40vw;
   transform: translate(-50%, -50%);
   filter: blur(100px);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.9;
+  opacity: 0.3;
   animation: ColorBlobs_spin__CbrXa 8s linear infinite;
   background: conic-gradient(
     from 0deg,

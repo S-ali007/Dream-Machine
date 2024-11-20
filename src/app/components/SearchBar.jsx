@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 const SearchBar = () => {
@@ -98,10 +99,10 @@ const SearchBar = () => {
   };
   return (
     <div>
-      <div className="relative max-w-[896px] w-full h-full">
+      <div className="relative max-w-[896px] w-full h-full pt-[120px]">
         <div className="spinning-gradient"></div>
       </div>
-
+  
       <div className="max-w-[896px] w-full flex mx-auto flex-col relative z-50">
         {/* Input and image upload */}
         <div className="w-full mx-auto bg-[#ffffff26]  items-center rounded-[28px]">
@@ -264,13 +265,11 @@ const SearchBar = () => {
           )}
 
           {!text && (
-            <div className="max-w-[864px] w-full flex items-center justify-between mt-2 gap-[20px] px-[15px]">
+            <div className=" w-full flex items-center justify-between mt-2  pl-[22px] pr-[15px]">
               <svg
                 onClick={handleArrowClick}
-                width="15"
-                height="15"
                 viewBox="0 0 15 15"
-                className="cursor-pointer"
+                className="cursor-pointer max-w-[17px] w-full"
               >
                 <path
                   d="M1.84998 7.49998C1.84998 4.66458 4.05979 1.84998 7.49998 1.84998C10.2783 1.84998 11.6515 3.9064 12.2367 5H10.5C10.2239 5 10 5.22386 10 5.5C10 5.77614 10.2239 6 10.5 6H13.5C13.7761 6 14 5.77614 14 5.5V2.5C14 2.22386 13.7761 2 13.5 2C13.2239 2 13 2.22386 13 2.5V4.31318C12.2955 3.07126 10.6659 0.849976 7.49998 0.849976C3.43716 0.849976 0.849976 4.18537 0.849976 7.49998C0.849976 10.8146 3.43716 14.15 7.49998 14.15C9.44382 14.15 11.0622 13.3808 12.2145 12.2084C12.8315 11.5806 13.3133 10.839 13.6418 10.0407C13.7469 9.78536 13.6251 9.49315 13.3698 9.38806C13.1144 9.28296 12.8222 9.40478 12.7171 9.66014C12.4363 10.3425 12.0251 10.9745 11.5013 11.5074C10.5295 12.4963 9.16504 13.15 7.49998 13.15C4.05979 13.15 1.84998 10.3354 1.84998 7.49998Z"
@@ -279,10 +278,16 @@ const SearchBar = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span className="text-white truncate  w-full">
-                <span className="font-[700]">Idea :</span>{" "}
+              <span className="text-white truncate max-w-[704px] w-full text-[14px]">
+                <span className="font-[700] text-[16px]">Idea :</span>{" "}
                 {dummyIdeas[ideaIndex]}
               </span>
+              <Link
+                href={"https://lumalabs.ai/dream-machine"}
+                className="text-white  max-w-[108px] w-full hover:underline"
+              >
+                Prompt Guide
+              </Link>
             </div>
           )}
         </div>
