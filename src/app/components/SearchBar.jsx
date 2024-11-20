@@ -82,7 +82,7 @@ const SearchBar = () => {
     <div className="">
       <div className="max-w-[896px] w-full flex mx-auto flex-col">
         {/* Input and image upload */}
-        <div className="w-full mx-auto bg-[#ffffff26] items-center rounded-[28px]">
+        <div className="w-full mx-auto bg-[#ffffff26]  items-center rounded-[28px]">
           {images.length > 0 && (
             <div className="max-w-[200px] w-full mt-[-50px] flex gap-7 ml-[22px]">
               {images.slice(0, 2).map((image, index) => (
@@ -113,7 +113,7 @@ const SearchBar = () => {
                     <div
                       className={`${
                         index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
-                      } rounded-lg max-w-[100px]   w-full h-[103px] p-[7px] text-[#fff]   bg-[#ffffff26] flex flex-col  cursor-pointer`}
+                      } rounded-lg max-w-[100px]   w-full h-[103px] p-[7px] text-[#fff]  backdrop-blur   bg-[#ffffff26] flex flex-col  cursor-pointer`}
                       onClick={() => triggerFileInputClick(index)}
                     >
                       <span className="text-[30px]">+</span>
