@@ -50,6 +50,32 @@ const SearchBar = () => {
     fileInputRef.current.click();
   };
 
+  const handleImageUpdate = (index) => {
+    triggerFileInputClick();
+    const handleNewImageChange = (e) => {
+      const files = Array.from(e.target.files);
+      if (files.length > 0) {
+        const newImages = [...images];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          newImages[index] = reader.result;
+          setImages(newImages);
+        };
+        reader.readAsDataURL(files[0]);
+      }
+    };
+    fileInputRef.current.addEventListener("change", handleNewImageChange, {
+      once: true,
+    });
+  };
+
+  const handleRemoveImage = (index) => {
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages[index] = null;
+      return updatedImages;
+    });
+  };
   const handleTextChange = (e) => {
     const textarea = textAreaRef.current;
     textarea.style.height = "auto";
@@ -62,15 +88,15 @@ const SearchBar = () => {
   };
   const handleSubmit = () => {
     // console.log("Text:", text);
-    // console.log("Images:", images);
+    console.log("Images:", images);
   };
-  const handleRemoveImage = (index) => {
-    setImages((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages[index] = null;
-      return updatedImages;
-    });
-  };
+  // const handleRemoveImage = (index) => {
+  //   setImages((prevImages) => {
+  //     const updatedImages = [...prevImages];
+  //     updatedImages[index] = null;
+  //     return updatedImages;
+  //   });
+  // };
 
   const handleSwapImages = () => {
     if (images.length === 2) {
@@ -100,6 +126,7 @@ const SearchBar = () => {
                         style={{
                           animationDelay: `${index * 0.4}s`,
                         }}
+                        onClick={() => handleImageUpdate(index)}
                       />
                       <span
                         className="mt-[-100px] ml-[40px] absolute bg-[#404040] max-w-[31px] w-full rounded-[30px] flex items-center justify-center text-white text-xl cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
@@ -113,7 +140,7 @@ const SearchBar = () => {
                       className={`${
                         index === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"
                       } rounded-lg max-w-[82px]   w-full h-[103px] p-[7px] text-[#fff]  backdrop-blur   bg-[#ffffff26] flex flex-col  cursor-pointer`}
-                      onClick={() => triggerFileInputClick(index)}
+                      onClick={() => handleImageUpdate(index)}
                     >
                       <span className="text-[30px]">+</span>
                       <span className="text-[13px] max-w-[64px] uppercase w-full">
@@ -184,8 +211,6 @@ const SearchBar = () => {
                 rows={1}
                 value={text}
                 onChange={handleTextChange}
-                // onFocus={() => setShowIdeas(false)}
-                // onBlur={() => setShowIdeas(true)}
                 placeholder="Type some text or add an image..."
                 className="w-full  h-fit focus:outline-none text-[white] text-[17px] font-[500] bg-transparent resize-none overflow-hidden "
               />
